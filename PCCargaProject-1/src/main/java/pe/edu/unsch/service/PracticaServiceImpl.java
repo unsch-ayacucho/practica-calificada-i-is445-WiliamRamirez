@@ -7,7 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import pe.edu.unsch.dao.PracticaDao;
-import pe.edu.unsch.entities.Semestreacademico;
+import pe.edu.unsch.entities.Docente;
+
 @Service
 public class PracticaServiceImpl implements PracticaService{
 
@@ -18,7 +19,7 @@ public class PracticaServiceImpl implements PracticaService{
 	
 	@Override
 	@Transactional(readOnly=true)
-	public List<Semestreacademico> retornar() {
+	public List<Docente> retornar() {
 		// TODO Auto-generated method stub
 		return practicaDao.retornar();
 	}

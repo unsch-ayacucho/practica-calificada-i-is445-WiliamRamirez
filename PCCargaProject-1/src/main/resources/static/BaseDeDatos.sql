@@ -1,8 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `cargabd` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `cargabd`;
+CREATE DATABASE  IF NOT EXISTS `cargabd1` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `cargabd1`;
 -- MySQL dump 10.13  Distrib 8.0.15, for Win64 (x86_64)
 --
--- Host: localhost    Database: cargabd
+-- Host: localhost    Database: cargabd1
 -- ------------------------------------------------------
 -- Server version	8.0.15
 
@@ -18,6 +18,30 @@ USE `cargabd`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `cargaacademica`
+--
+
+DROP TABLE IF EXISTS `cargaacademica`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `cargaacademica` (
+  `idcargaacademica` int(11) NOT NULL,
+  `horascargaacademica` varchar(45) NOT NULL,
+  PRIMARY KEY (`idcargaacademica`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cargaacademica`
+--
+
+LOCK TABLES `cargaacademica` WRITE;
+/*!40000 ALTER TABLE `cargaacademica` DISABLE KEYS */;
+INSERT INTO `cargaacademica` VALUES (1,'16'),(2,'14'),(3,'11');
+/*!40000 ALTER TABLE `cargaacademica` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `docente`
 --
 
@@ -27,7 +51,13 @@ DROP TABLE IF EXISTS `docente`;
 CREATE TABLE `docente` (
   `iddocente` int(11) NOT NULL,
   `nombredocente` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  PRIMARY KEY (`iddocente`)
+  `semestreacademico_idsemestreacademico` int(11) NOT NULL,
+  `cargaacademica_idcargaacademica` int(11) NOT NULL,
+  PRIMARY KEY (`iddocente`),
+  KEY `fk_docente_semestreacademico1_idx` (`semestreacademico_idsemestreacademico`),
+  KEY `fk_docente_cargaacademica1_idx` (`cargaacademica_idcargaacademica`),
+  CONSTRAINT `fk_docente_cargaacademica1` FOREIGN KEY (`cargaacademica_idcargaacademica`) REFERENCES `cargaacademica` (`idcargaacademica`),
+  CONSTRAINT `fk_docente_semestreacademico1` FOREIGN KEY (`semestreacademico_idsemestreacademico`) REFERENCES `semestreacademico` (`idsemestreacademico`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -37,7 +67,7 @@ CREATE TABLE `docente` (
 
 LOCK TABLES `docente` WRITE;
 /*!40000 ALTER TABLE `docente` DISABLE KEYS */;
-INSERT INTO `docente` VALUES (1,'Barrientos'),(2,'Lagos'),(3,'Fredy Barrientos'),(4,'Damaris Solier'),(5,'Wiliam Ramirez'),(6,'Jhuder Palomino');
+INSERT INTO `docente` VALUES (1,'Fredy Barrientos',1,1),(2,'Damariz Solier',2,2),(3,'Wiliam Ramirez',3,3);
 /*!40000 ALTER TABLE `docente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -51,11 +81,7 @@ DROP TABLE IF EXISTS `semestreacademico`;
 CREATE TABLE `semestreacademico` (
   `idsemestreacademico` int(11) NOT NULL,
   `numerosemestreacademico` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `cargaacademica` int(11) NOT NULL,
-  `docente_iddocente` int(11) NOT NULL,
-  PRIMARY KEY (`idsemestreacademico`),
-  KEY `fk_semestreacademico_docente_idx` (`docente_iddocente`),
-  CONSTRAINT `fk_semestreacademico_docente` FOREIGN KEY (`docente_iddocente`) REFERENCES `docente` (`iddocente`)
+  PRIMARY KEY (`idsemestreacademico`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -65,16 +91,16 @@ CREATE TABLE `semestreacademico` (
 
 LOCK TABLES `semestreacademico` WRITE;
 /*!40000 ALTER TABLE `semestreacademico` DISABLE KEYS */;
-INSERT INTO `semestreacademico` VALUES (1,'2019-I',15,1),(2,'2019-I',14,2),(3,'2018-I',16,3),(4,'2019-I',12,4),(5,'2019-I',13,5);
+INSERT INTO `semestreacademico` VALUES (1,'2019-I'),(2,'2018-II'),(3,'2019-I');
 /*!40000 ALTER TABLE `semestreacademico` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Dumping events for database 'cargabd'
+-- Dumping events for database 'cargabd1'
 --
 
 --
--- Dumping routines for database 'cargabd'
+-- Dumping routines for database 'cargabd1'
 --
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -86,4 +112,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-07-11 19:02:54
+-- Dump completed on 2019-07-12  8:43:01

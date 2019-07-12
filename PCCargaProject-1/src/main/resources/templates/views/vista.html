@@ -2,13 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
-<title>Insert title here</title>
+<title>Primera practica Calificada</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
 </head>
-<body>
+<body >
 
 	<div class="container">
 		<h1 class="text-success" border border-succes>Practica Calificada</h1>
@@ -21,10 +21,10 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="semestreacademico: ${practica}">
-          <td th:text="${semestreacademico.docente.nombredocente}"></td>
-          <td th:text="${semestreacademico.numerosemestreacademico}"></td>
-          <td th:text="${semestreacademico.cargaacademica}"></td>
+				<tr th:each="docente: ${practica}">
+          <td th:text="${docente.nombredocente}"></td>
+          <td th:text="${docente.semestreacademico.numerosemestreacademico}"></td>
+          <td th:text="${docente.cargaacademica.horascargaacademica}"></td>
         </tr>
 			
 			</tbody>
